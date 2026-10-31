@@ -1,10 +1,16 @@
 
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Container from "./container";
 import { siteConfig } from "@/lib/site";
 
 const find = (label: string) =>
   siteConfig.social.find((s) => s.label === label)?.href ?? "";
-const first = (...labels: string[]) => labels.map(find).find(Boolean) ?? "";
+
+const first = (...labels: string[]) =>
+  labels.map(find).find(Boolean) ?? "";
+
 const ext = (href: string) =>
   href.startsWith("http")
     ? { target: "_blank", rel: "noopener noreferrer" }
@@ -15,13 +21,64 @@ export default function Contact() {
   const roleHref = first("Email", "LinkedIn");
   const reach = siteConfig.social.filter((s) => s.href);
 
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const heading = headingRef.current;
+
+    if (!heading || isVisible) return;
+
+    if (!("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    observer.observe(heading);
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  const headline = "Have something to build?";
+
   return (
     <section id="contact" className="pb-[clamp(3.5rem,8vw,7rem)]">
       <Container>
         <div className="rounded-[3px] bg-accent p-[clamp(2rem,7vw,7rem)] text-on-accent">
-          <h2 className="max-w-[12ch] font-serif text-[clamp(3rem,9vw,8rem)] leading-[0.92] tracking-[-0.03em]">
-            Have something to build?
+          <h2
+            ref={headingRef}
+            aria-label={headline}
+            className={`contact-heading max-w-[12ch] font-serif text-[clamp(3rem,9vw,8rem)] leading-[0.92] tracking-[-0.03em] ${
+              isVisible ? "is-visible" : ""
+            }`}
+          >
+            <span aria-hidden="true">
+              {Array.from(headline).map((character, index) => (
+                <span
+                  key={index}
+                  className="contact-letter"
+                  style={{
+                    animationDelay: `${index * 35}ms`,
+                  }}
+                >
+                  {character === " " ? "\u00A0" : character}
+                </span>
+              ))}
+            </span>
           </h2>
+
           <p className="mt-6 max-w-[48ch] opacity-90">
             Whether it’s a store, a web app or a role on your team, tell me
             what you have in mind.
@@ -37,6 +94,7 @@ export default function Contact() {
                 Start a project
               </a>
             )}
+
             {roleHref && (
               <a
                 href={roleHref}

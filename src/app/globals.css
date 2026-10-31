@@ -156,3 +156,21 @@ body {
     transition: none;
   }
 }
+
+
+/* Contact headline writing effect */
+.contact-letter {
+  display: inline-block;
+}
+
+.contact-heading.is-visible .contact-letter {
+  animation: letter-appear 180ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-heading.is-visible .contact-letter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
