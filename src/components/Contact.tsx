@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Container from "./container";
 import { siteConfig } from "@/lib/site";
 
@@ -52,6 +52,7 @@ export default function Contact() {
   }, [isVisible]);
 
   const headline = "Have something to build?";
+  const words = headline.split(" ");
 
   return (
     <section id="contact" className="pb-[clamp(3.5rem,8vw,7rem)]">
@@ -65,17 +66,30 @@ export default function Contact() {
             }`}
           >
             <span aria-hidden="true">
-              {Array.from(headline).map((character, index) => (
-                <span
-                  key={index}
-                  className="contact-letter"
-                  style={{
-                    animationDelay: `${index * 35}ms`,
-                  }}
-                >
-                  {character === " " ? "\u00A0" : character}
-                </span>
-              ))}
+              {words.map((word, wordIndex) => {
+                const letterOffset = words
+                  .slice(0, wordIndex)
+                  .reduce((total, previousWord) => total + previousWord.length + 1, 0);
+
+                return (
+                  <Fragment key={wordIndex}>
+                    <span className="contact-word">
+                      {Array.from(word).map((character, index) => (
+                        <span
+                          key={index}
+                          className="contact-letter"
+                          style={{
+                            animationDelay: `${(letterOffset + index) * 35}ms`,
+                          }}
+                        >
+                          {character}
+                        </span>
+                      ))}
+                    </span>
+                    {wordIndex < words.length - 1 ? " " : null}
+                  </Fragment>
+                );
+              })}
             </span>
           </h2>
 

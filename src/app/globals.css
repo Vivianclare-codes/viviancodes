@@ -163,6 +163,10 @@ body {
   display: inline-block;
 }
 
+.contact-word {
+  white-space: nowrap;
+}
+
 .contact-heading.is-visible .contact-letter {
   animation: letter-appear 180ms ease-out both;
 }
