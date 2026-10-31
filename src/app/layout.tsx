@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -31,7 +33,17 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${dmSans.variable}`}
     >
       <body className="bg-paper font-sans text-ink antialiased">
-        {children}
+             <body className="bg-paper font-sans text-ink antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-accent focus:px-4 focus:py-2 focus:text-on-accent"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+      </body>
       </body>
     </html>
   );
