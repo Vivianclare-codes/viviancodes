@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -56,12 +57,15 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 border-b bg-paper/90 backdrop-blur transition-colors ${
+        className={`sticky top-0 z-40 border-b bg-paper/90 backdrop-blur transition-colors motion-reduce:transition-none ${
           scrolled ? "border-line" : "border-transparent"
         }`}
       >
         <Container className="flex h-[68px] items-center justify-between">
-          <Link href="/" className="font-serif text-[1.45rem] leading-none">
+          <Link
+            href="/"
+            className="font-serif text-[1.45rem] leading-none transition-colors duration-200 hover:text-accent motion-reduce:transition-none"
+          >
             {siteConfig.name}
           </Link>
 
@@ -69,7 +73,10 @@ export default function Header() {
             <ul className="flex gap-8 text-[0.95rem] text-mute">
               {siteConfig.nav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="transition-colors hover:text-ink">
+                  <Link
+                    href={item.href}
+                    className="transition-colors duration-200 hover:text-accent motion-reduce:transition-none"
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -80,7 +87,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Link
               href="/#contact"
-              className="hidden rounded-sm border border-accent px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-on-accent sm:inline-block"
+              className="hidden rounded-sm border border-accent px-4 py-2 text-sm font-medium text-accent transition-colors duration-200 hover:bg-accent hover:text-on-accent motion-reduce:transition-none sm:inline-block"
             >
               Work with me
             </Link>
@@ -92,7 +99,7 @@ export default function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               onClick={() => setOpen(true)}
-              className="-mr-2 flex h-11 w-11 items-center justify-center md:hidden"
+              className="-mr-2 flex h-11 w-11 items-center justify-center transition-colors hover:text-accent motion-reduce:transition-none md:hidden"
             >
               <span aria-hidden="true" className="flex w-6 flex-col gap-[6px]">
                 <span className="h-[1.5px] w-full bg-ink" />
@@ -130,7 +137,7 @@ export default function Header() {
             type="button"
             aria-label="Close menu"
             onClick={closeAndReturn}
-            className="-mr-2 flex h-11 w-11 items-center justify-center"
+            className="-mr-2 flex h-11 w-11 items-center justify-center transition-colors hover:text-accent motion-reduce:transition-none"
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
               <path d="M4 4l14 14M18 4L4 18" stroke="currentColor" strokeWidth="1.5" />
@@ -142,7 +149,11 @@ export default function Header() {
           <ul className="flex flex-col gap-4 font-serif text-4xl">
             {siteConfig.nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} onClick={close}>
+                <Link
+                  href={item.href}
+                  onClick={close}
+                  className="transition-colors duration-200 hover:text-accent motion-reduce:transition-none"
+                >
                   {item.label}
                 </Link>
               </li>
@@ -153,7 +164,7 @@ export default function Header() {
         <Link
           href="/#contact"
           onClick={close}
-          className="mt-10 inline-block self-start rounded-sm bg-accent px-6 py-3 text-sm font-medium text-on-accent"
+          className="mt-10 inline-block self-start rounded-sm bg-accent px-6 py-3 text-sm font-medium text-on-accent transition-colors duration-200 hover:bg-paper-2 hover:text-ink motion-reduce:transition-none"
         >
           Work with me
         </Link>
@@ -164,7 +175,7 @@ export default function Header() {
               <li key={s.label}>
                 <a
                   href={s.href}
-                  className="transition-colors hover:text-ink"
+                  className="transition-colors duration-200 hover:text-accent motion-reduce:transition-none"
                   {...(s.href.startsWith("http")
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}

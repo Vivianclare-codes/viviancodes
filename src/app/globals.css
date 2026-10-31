@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 :root {
@@ -38,7 +39,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
@@ -62,14 +62,17 @@ body {
   width: 10px;
   height: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--paper);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
   border-radius: 999px;
   border: 2px solid var(--paper);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--accent) 75%, var(--ink));
 }
@@ -82,8 +85,74 @@ body {
   }
 }
 
+/* Phase 7: Hero writing effect */
+@keyframes letter-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.writing-letter {
+  animation: letter-appear 180ms ease-out both;
+}
+
+/* Accessibility: reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .writing-letter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* Phase 7: How I build reveal */
+
+.principle-rule {
+  height: 1px;
+  width: 100%;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 550ms ease-out;
+}
+
+.principle-content {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 450ms ease-out,
+    transform 450ms ease-out;
+}
+
+.how-build.is-visible .principle-rule {
+  transform: scaleX(1);
+}
+
+.how-build.is-visible .principle-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .principle-rule {
+    transform: none;
+    transition: none;
+  }
+
+  .principle-content {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

@@ -1,3 +1,4 @@
+
 import Container from "./container";
 import { siteConfig } from "@/lib/site";
 
@@ -31,7 +32,7 @@ export default function Contact() {
               <a
                 href={projectHref}
                 {...ext(projectHref)}
-                className="rounded-sm border border-on-accent bg-on-accent px-6 py-3 text-[0.95rem] font-medium text-accent transition-colors hover:bg-transparent hover:text-on-accent"
+                className="rounded-sm border border-on-accent bg-on-accent px-6 py-3 text-[0.95rem] font-medium text-accent transition-colors duration-200 hover:bg-transparent hover:text-on-accent motion-reduce:transition-none"
               >
                 Start a project
               </a>
@@ -40,7 +41,7 @@ export default function Contact() {
               <a
                 href={roleHref}
                 {...ext(roleHref)}
-                className="rounded-sm border border-on-accent px-6 py-3 text-[0.95rem] font-medium text-on-accent transition-colors hover:bg-on-accent hover:text-accent"
+                className="rounded-sm border border-on-accent px-6 py-3 text-[0.95rem] font-medium text-on-accent transition-colors duration-200 hover:bg-on-accent hover:text-accent motion-reduce:transition-none"
               >
                 Talk about a role
               </a>
@@ -54,7 +55,7 @@ export default function Contact() {
                   <a
                     href={s.href}
                     {...ext(s.href)}
-                    className="underline-offset-4 hover:underline"
+                    className="underline-offset-4 transition-colors duration-200 hover:underline hover:text-paper-2 motion-reduce:transition-none"
                   >
                     {s.label}
                   </a>

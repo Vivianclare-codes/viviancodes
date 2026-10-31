@@ -1,3 +1,4 @@
+
 import Container from "./container";
 import { siteConfig } from "@/lib/site";
 
@@ -8,7 +9,9 @@ export default function Footer() {
     <footer className="border-t border-line py-10 text-sm text-mute">
       <Container className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
         <div>
-          <p className="font-serif text-2xl text-ink">{siteConfig.name}</p>
+          <p className="font-serif text-2xl text-ink transition-colors duration-200 hover:text-accent motion-reduce:transition-none">
+            {siteConfig.name}
+          </p>
           <p>{siteConfig.role}</p>
         </div>
 
@@ -19,7 +22,7 @@ export default function Footer() {
                 <li key={s.label}>
                   <a
                     href={s.href}
-                    className="transition-colors hover:text-ink"
+                    className="transition-colors duration-200 hover:text-accent motion-reduce:transition-none"
                     {...(s.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}

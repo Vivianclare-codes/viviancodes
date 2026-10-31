@@ -1,14 +1,42 @@
+
 import Container from "./container";
 
 const stack = ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Shopify"];
 
+const headlineLines = ["Software", "with taste."];
+
 export default function Hero() {
+  let letterIndex = 0;
+
   return (
     <section className="pb-[clamp(3.5rem,8vw,7rem)] pt-[clamp(4.5rem,12vw,10.5rem)]">
       <Container>
-        <h1 className="font-serif text-[clamp(3.6rem,12.5vw,11.5rem)] leading-[0.9] tracking-[-0.035em]">
-          <span className="block">Software</span>
-          <span className="block">with taste.</span>
+        <h1
+          aria-label="Software with taste."
+          className="font-serif text-[clamp(3.6rem,12.5vw,11.5rem)] leading-[0.9] tracking-[-0.035em]"
+        >
+          {headlineLines.map((line, lineIndex) => (
+            <span
+              key={line}
+              aria-hidden="true"
+              className="block"
+            >
+              {Array.from(line).map((letter, index) => {
+                const delay = letterIndex * 45;
+                letterIndex += 1;
+
+                return (
+                  <span
+                    key={`${lineIndex}-${index}`}
+                    className="writing-letter inline-block"
+                    style={{ animationDelay: `${delay}ms` }}
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </span>
+                );
+              })}
+            </span>
+          ))}
         </h1>
 
         <div className="mt-[clamp(1.75rem,4vw,3.25rem)] grid items-end gap-8 md:grid-cols-2">

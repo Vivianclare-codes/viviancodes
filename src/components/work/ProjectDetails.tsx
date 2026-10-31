@@ -1,3 +1,4 @@
+
 import type { Project } from "@/lib/projects";
 
 type Props = {
@@ -20,8 +21,10 @@ export default function ProjectDetails({
     : "text-[clamp(2rem,3.6vw,3rem)]";
   const muted = dark ? "text-[#a99f91]" : "text-mute";
   const rule = dark ? "border-[#38302a]" : "border-line";
-  const linkClass = `font-medium underline decoration-[1.5px] underline-offset-[5px] ${
-    dark ? "text-[#efe8dc] decoration-[#d9959a]" : "decoration-accent"
+  const linkClass = `font-medium underline decoration-[1.5px] underline-offset-[5px] transition-colors duration-200 motion-reduce:transition-none ${
+    dark
+      ? "text-[#efe8dc] decoration-[#d9959a] hover:text-[#d9959a]"
+      : "decoration-accent hover:text-accent"
   }`;
   const links = project.links.filter((l) => l.href);
 
